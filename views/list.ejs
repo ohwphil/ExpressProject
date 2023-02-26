@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Above Multi-purpose Free Bootstrap Responsive Template</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="description" content="" />
+        <meta name="author" content="http://webthemez.com" />
+        <!-- css -->
+        <link href="bootstrap.min.css" rel="stylesheet" />
+        <link href="fancybox/jquery.fancybox.css" rel="stylesheet">
+        <link href="jcarousel.css" rel="stylesheet" />
+        <link href="flexslider.css" rel="stylesheet" />
+        <link href="owl-carousel/owl.carousel.css" rel="stylesheet">
+        <link href="style.css" rel="stylesheet" />
+        <link type="text/css" href="book-display.css" rel="stylesheet" />
+    </head>
+    <body>
+        <div id="wrapper">
+            <!-- start header -->
+            <header>
+                <div class="navbar navbar-default navbar-static-top">
+                    <div class="container">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <a class="navbar-brand" href="index.html"><img src="logo.png" alt="logo"/></a>
+                        </div>
+                        <div class="navbar-collapse collapse ">
+                            <ul class="nav navbar-nav">
+                                <li><a href="/home">홈</a></li> 
+                                <li><a href="/login">로그인/회원가입</a></li>
+                                <li class="active"><a href="/list">도서 목록</a></li>
+                                <li><a href="#">도서추천 게시판</a></li>
+                                <li><a href="#">인기 도서</a></li>
+                                <li><a href="#">마이페이지</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <section id="inner-headline">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h2 class="pageTitle">도서 목록</h2>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section id="content">
+                <!-- 나중에 UI 바꾸자... 한줄씩-->
+                <div class="set_of_five">
+                    <% for (var i = 0; i < 5; i++) { %>
+                        <div class="book">
+                            <img src="" style="width:100px;height:100px;" alt=<%= data[i].bookname %>/>
+                            <h5> <%= data[i].bookname %> </h5>
+                            <h5> <%= data[i].publisher %> </h5>
+                        </div>
+                    <% } %>
+                <div class="set_of_five">
+                    <% for (var i = 5; i < 10; i++) { %>
+                        <div class="book">
+                            <img src="" style="width:100px;height:100px;" alt=<%= data[i].bookname %>/>
+                            <h5> <%= data[i].bookname %> </h5>
+                            <h5> <%= data[i].publisher %> </h5>
+                        </div>
+                    <% } %>
+                </div>
+            </section>
+            <footer>
+            </footer>
+        </div>
+        <a href="#" class="scrollup"><i class="fa fa-angle-up active"></i></a>
+        <!-- javascript
+            ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="jquery.js"></script>
+        <script src="jquery.easing.1.3.js"></script>
+        <script src="bootstrap.min.js"></script>
+        <script src="jquery.fancybox.pack.js"></script>
+        <script src="jquery.fancybox-media.js"></script> 
+        <script src="portfolio/jquery.quicksand.js"></script>
+        <script src="portfolio/setting.js"></script>
+        <script src="jquery.flexslider.js"></script>
+        <script src="animate.js"></script>
+        <script src="custom.js"></script>
+        <script src="owl-carousel/owl.carousel.js"></script>
+    </body>
+</html>

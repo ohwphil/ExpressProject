@@ -1,0 +1,7 @@
+{
+    "host"     : "localhost",
+    "user"     : "root",
+    "password" : "0000",
+    "database" : "book_q",
+    "connectionLimit": 30
+  }

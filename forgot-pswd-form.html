@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Above Multi-purpose Free Bootstrap Responsive Template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="" />
+    <meta name="author" content="http://webthemez.com" />
+    <!-- css -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      media="screen"
+      href="/bootstrap.css"
+    />
+    <link href="/bootstrap.min.css" rel="stylesheet" />
+    <link href="/fancybox/jquery.fancybox.css" rel="stylesheet" />
+    <link href="/jcarousel.css" rel="stylesheet" />
+    <link href="/flexslider.css" rel="stylesheet" />
+    <link href="/owl-carousel/owl.carousel.css" rel="stylesheet" />
+    <link href="/style.css" rel="stylesheet" />
+    <style>
+      .panel-style {
+        padding-top: 70px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <div class="navbar navbar-default navbar-static-top">
+          <div class="container">
+            <div class="navbar-header">
+              <button
+                type="button"
+                class="navbar-toggle"
+                data-toggle="collapse"
+                data-target=".navbar-collapse"
+              >
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="/home"
+                ><img src="/logo.png" alt="logo"
+              /></a>
+            </div>
+            <div class="navbar-collapse collapse">
+              <ul class="nav navbar-nav">
+                <li><a href="/home">홈</a></li>
+                <li class="active"><a href="/login">로그인/회원가입</a></li>
+                <li><a href="/list">도서 목록</a></li>
+                <li><a href="#">도서추천 게시판</a></li>
+                <li><a href="#">인기 도서</a></li>
+                <li><a href="#">마이페이지</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </header>
+      <div class="container">
+        <div class="col-md-4 col-md-offset-4 panel-style">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">
+                <strong>
+                  <span
+                    class="glyphicon glyphicon-lock"
+                    aria-hidden="true"
+                  ></span>
+                  Forgot Password
+                </strong>
+              </h3>
+            </div>
+            <div class="textbox">
+              <form
+                action="/login/forgot-pswd/verify"
+                id="register-form"
+                method="post"
+              >
+                <br />
+                <div class="alert alert-info">
+                  <button
+                    type="button"
+                    class="close"
+                    data-dismiss="alert"
+                    aria-hidden="true"
+                  >
+                    &times;
+                  </button>
+                  <strong>Info</strong><br />
+                  Enter your valid email before procced to password reset.
+                </div>
+                <div class="form-group">
+                  <br />
+                  <label for="email">이메일</label>
+                  <input
+                    type="email"
+                    name="email"
+                    id="email"
+                    class="form-control"
+                    placeholder="yourmail@example.com"
+                  />
+                </div>
+                <div class="form-group">
+                  <button
+                    type="button"
+                    onclick="formCheck()"
+                    class="btn btn-primary btn-block"
+                  >
+                    <span
+                      class="glyphicon glyphicon-send"
+                      aria-hidden="true"
+                    ></span>
+                    Submit
+                  </button>
+                  <br />
+                  <a href="/login">Login</a> |
+                  <a href="/register-form">Register</a> |
+                  <a href="#">Homepage</a>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="jquery-3.3.1.min.js"></script>
+    <script src="bootstrap.js"></script>
+    <script type="text/javascript">
+      var form = document.getElementById("register-form");
+      var e_element = document.getElementById("email");
+      var pass = true;
+      function formCheck() {
+        var email = e_element.value;
+        if (email == "") {
+          pass = false;
+          e_element.style.borderColor = "red";
+        } else {
+          pass = true;
+          e_element.style.borderColor = "#ccc"; // 이거보다 조금 더 괜찮은 방법?
+        }
+        if (pass) {
+          form.submit();
+        }
+      }
+    </script>
+  </body>
+</html>

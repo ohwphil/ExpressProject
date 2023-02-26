@@ -3,6 +3,8 @@
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
+const jwt = require("jsonwebtoken");
+const secretKey = "your-secret-key"; /* 실무에서는 제대로 해야함 */
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -104,6 +106,14 @@ app.post("/login/verify", function (req, res) {
     });
   });
   // 다음 동작
+  if (success) {
+    const user = { email };
+    const token = jwt.sign(user, secretKey);
+    res.json({ token });
+  } else {
+    alert("Failed to login");
+    res.redirect("/login");
+  }
 });
 app.post("/login/register-form/verify", function (req, res) {
   const email = req.body.email;

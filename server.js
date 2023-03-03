@@ -31,7 +31,17 @@ const connection = mysql.createConnection({
 
 connection.connect();
 
+connection.connect(function (error) {
+  if (error) {
+    console.error("Error connecting to MySQL database: " + error.stack);
+    return;
+  }
+
+  console.log("Connected to MySQL database as id " + connection.threadId);
+});
+
 const bcrypt = require("bcrypt");
+const { application } = require("express");
 const saltRounds = 10;
 
 app.get("/", function (req, res) {
@@ -89,21 +99,18 @@ app.post("/login/verify", function (req, res) {
   const password = req.body.password;
   let success = true;
 
-  connection.connect(function (err) {
+  const sql = `SELECT password FROM users WHERE email = '${email}'`;
+  connection.query(sql, function (err, result) {
     if (err) throw err;
-    const sql = `SELECT password FROM users WHERE email = '${email}'`;
-    connection.query(sql, function (err, result) {
-      if (err) throw err;
-      if (result.length === 0) {
-        success = false;
-      } else {
-        var saved_hash = result.length[0];
-        bcrypt.compare(password, saved_hash, function (err, res) {
-          if (err) throw err;
-          success = res;
-        });
-      }
-    });
+    if (result.length === 0) {
+      success = false;
+    } else {
+      var saved_hash = result.length[0];
+      bcrypt.compare(password, saved_hash, function (err, res) {
+        if (err) throw err;
+        success = res;
+      });
+    }
   });
   // 다음 동작
   if (success) {
@@ -119,27 +126,28 @@ app.post("/login/register-form/verify", function (req, res) {
   const email = req.body.email;
   const password = req.body.password;
   let success = true;
-  // 이메일이 맞는지 검증하는 코드 여러줄 ....
-  connection.connect(function (err) {
+  const sql_select = `SELECT * FROM users WHERE email = '${email}'`;
+  connection.query(sql_select, function (err, result) {
     if (err) throw err;
-    const sql_select = `SELECT '${password}' FROM users WHERE email = '${email}'`;
-    connection.query(sql_select, function (err, result) {
-      if (err) throw err;
-      if (result.length != 0) {
-        success = false; // 이미 계정이 존재함
-      }
-    });
-    if (success) {
-      bcrypt.hash(password, saltRounds, function (err, hash) {
-        if (err) throw err;
-        const sql_insert = `INSERT INTO users VALUES(email, hashed) ('${email}', '${hash}')`;
-        connection.query(sql_insert, function (err, result) {
-          if (err) throw err;
-          // 다음 동작
-        });
-      });
+    if (result.length !== 0) {
+      // 버그다
+      console.log(result.length);
+      success = false; // 이미 계정이 존재함
     }
   });
+  if (success) {
+    bcrypt.hash(password, saltRounds, function (err, hash) {
+      if (err) throw err;
+      const sql_insert = `INSERT INTO users (email, hashed) VALUES ('${email}', '${hash}')`;
+      connection.query(sql_insert, function (err, result) {
+        if (err) throw err;
+      });
+    });
+    console.log("환영합니다! 로그인해 주십시오.");
+  } else {
+    console.log("이메일에 해당하는 계정이 이미 존재합니다.");
+  }
+  res.redirect("/login");
 });
 app.post("/login/forgot-pswd/verify", function (req, res) {
   const email = req.body.email;

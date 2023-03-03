@@ -213,7 +213,7 @@ app.get("/list", function (req, res) {
       if (error) throw error;
       // 이런 식으로 액세스
       // console.log(rows[0].bookname)
-      res.render("list", { data: rows });
+      res.render("book_board", { data: rows });
     }
   );
 });
